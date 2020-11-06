@@ -11,25 +11,33 @@
     
 
     <div class="topnav">
-        <input type="text" placeholder="Search for song.."  placeholder="search"   name="search" id="search" disabled>
+        <input type="text" placeholder="Search for song.."  placeholder = "search"   name = "search" id = "search" disabled>
     </div>
     
-    <div id="match-list">
+    <div id="match-list"></div>
 
-    </div>
-
-    <div id = "match-list-album">
-        
-    </div>
-
-    <ul class="list-group" id="list"></ul>
+    <div id = "match-list-album"></div>
     
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class = "close">&times;</span>
+                <h2 id = "albumId">Modal Header</h2>
+            </div>
 
-    <script src="main.js"></script>
+            <div class="modal-body">
+                <ul id = "ul">
+                </ul>
+            </div>
+        </div>
+    </div>    
+
     
     <div class="container" id="container">
         <div id="box" class="box"></div>
     </div>
+
+    <script src="main.js"></script>
 
 </body>
 </html>

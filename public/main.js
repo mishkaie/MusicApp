@@ -119,17 +119,17 @@ function albumPage() {
 
     for (let i = 0; i <= 24; i++) {
 
-        let object = Object.values(data.alben)
-        let cue =  Object.values(data.cueData)
-        
-        console.log(cue)
+        let object = Object.values(data.alben);
+        let cue =  Object.values(data.cueData);
         
         var div = document.createElement("div");
         var img = document.createElement("img");
 
-        div.setAttribute('class','diviko');
+        div.setAttribute('id',`diviko-${object[i].albumID}`);
+        
         img.src = object[i].albumCoverSmall;
-        var src = document.getElementById("box");
+
+        var box = document.getElementById("box");
 
         img.setAttribute('id',"img")
 
@@ -137,8 +137,51 @@ function albumPage() {
 
         div.appendChild(img)
 
-        src.appendChild(div);
+        box.appendChild(div);
 
+        var modal = document.getElementById("myModal");
+
+        var diviko = document.getElementById(`diviko-${object[i].albumID}`);
+
+        var span = document.getElementsByClassName("close")[0];
+
+        diviko.onclick = function() {
+
+            modal.style.display = "block";
+
+            var ul = document.getElementById('ul');
+            ul.innerHTML = '';
+
+            var albums = document.getElementById('albumId');
+
+            albums.innerHTML = `${object[i].albumName}`;
+
+            for (var c = 0; c <= 5; c++){
+                var li = document.createElement('li');
+                let result = cue.find(e => e.cueID === object[i].cueIDs[c])
+                if(result) {
+                    li.innerHTML = `${result.cueName} &nbsp
+                    <audio id="audio-${result.cueID}">
+                            <source src="${result.cuePreviewURL}" type="audio/mpeg">
+                        </audio>
+                        <button onclick="audioButton('audio-${result.cueID}')"
+                    type="button" class="button-audio">Play Audio</button>
+                    `
+                }
+                ul.appendChild(li);
+            }   
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+            
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     }
 }
 
